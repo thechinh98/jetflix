@@ -20,7 +20,7 @@ import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.jetflix.ui.theme.JetflixTheme
+import com.example.jetflix.presentation.theme.JetflixTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,7 +62,7 @@ fun FilmItem(modifier: Modifier = Modifier) {
 //            )
             Box(
                 modifier = Modifier
-                    .background(MaterialTheme.colors.primary)
+                    .background(Black.copy(alpha = 0.2f))
                     .heightIn(100.dp)
                     .fillMaxWidth()
             ) {
@@ -73,7 +73,20 @@ fun FilmItem(modifier: Modifier = Modifier) {
                         .background(Black.copy(alpha = 0.5f))
                         .padding(horizontal = 5.dp, vertical = 5.dp)
                 ) {
-                    Text("Avatar 5", fontSize = 10.sp,)
+                    Column() {
+                        Text(
+                            "Avatar 5",
+                            fontSize = 10.sp,
+                            modifier = Modifier.padding(bottom = 5.dp),
+                            color = MaterialTheme.colors.onPrimary
+                        )
+                        Row(
+
+                        ){
+
+                        }
+                    }
+
                 }
             }
         }
