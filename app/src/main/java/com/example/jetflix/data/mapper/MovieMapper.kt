@@ -1,13 +1,13 @@
 package com.example.jetflix.data.mapper
 
-import com.example.jetflix.data.model.MovieResponse
+import com.example.jetflix.data.model.MovieModel
 import com.example.jetflix.domain.entities.MovieEntity
 import com.example.jetflix.util.Mapper
 import com.example.jetflix.util.toPosterUrl
 import javax.inject.Inject
 
-class MovieMapper @Inject constructor() : Mapper<MovieResponse, MovieEntity> {
-    override fun map(input: MovieResponse) = MovieEntity(
+class MovieMapper @Inject constructor() : Mapper<MovieEntity, MovieModel> {
+    override fun map(input: MovieEntity) = MovieModel(
         id = input.id,
         name = input.name,
         releaseDate = input.firstAirDate.orEmpty(),

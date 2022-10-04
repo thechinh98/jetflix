@@ -1,7 +1,7 @@
 package com.example.jetflix.data.api
 
-import com.example.jetflix.data.model.GenresResponse
-import com.example.jetflix.data.model.MoviesResponse
+import com.example.jetflix.domain.entities.GenresResponse
+import com.example.jetflix.domain.entities.MoviesResponse
 import com.yasinkacmaz.jetflix.data.CreditsResponse
 import com.yasinkacmaz.jetflix.data.ImagesResponse
 import com.yasinkacmaz.jetflix.data.MovieDetailResponse

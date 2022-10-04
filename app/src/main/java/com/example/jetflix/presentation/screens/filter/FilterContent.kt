@@ -1,9 +1,6 @@
 package com.example.jetflix.presentation.screens.filter
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
@@ -14,9 +11,21 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.jetflix.R
+import com.example.jetflix.domain.entities.FilterState
+import com.example.jetflix.presentation.screens.filter.option.toFilterOptions
 
 @Composable
-fun FilterHeader(onHideClicked: () -> Unit, onResetClick: (() -> Unit)? = null) {
+fun FilterBottomSheetContent(filterState: FilterState, onFilterStateChanged: (FilterState) -> Unit) {
+    Spacer(modifier = Modifier.padding(top = 4.dp))
+    filterState.toFilterOptions().forEach { filterOption ->
+        filterOption.Render {
+            val newState = filterOption.modifyFilterState(filterState)
+            onFilterStateChanged(newState)
+        }
+    }
+}
+@Composable
+fun FilterHeader(onHideClicked: () -> Unit, onResetClicked: (() -> Unit)? = null) {
     Surface(
         Modifier.fillMaxWidth(),
         elevation = 8.dp,
@@ -45,8 +54,8 @@ fun FilterHeader(onHideClicked: () -> Unit, onResetClick: (() -> Unit)? = null) 
                     style = MaterialTheme.typography.body1,
                 )
             }
-            if (onResetClick != null) {
-                IconButton(onClick = { onResetClick() }) {
+            if (onResetClicked != null) {
+                IconButton(onClick = { onResetClicked() }) {
                     Text(
                         text = stringResource(id = R.string.reset),
                         color = MaterialTheme.colors.onPrimary,
@@ -61,5 +70,5 @@ fun FilterHeader(onHideClicked: () -> Unit, onResetClick: (() -> Unit)? = null) 
 @Preview
 @Composable
 fun FilterHeaderPreview() {
-    FilterHeader(onHideClicked = {}, onResetClick = {})
+    FilterHeader(onHideClicked = {}, onResetClicked = {})
 }

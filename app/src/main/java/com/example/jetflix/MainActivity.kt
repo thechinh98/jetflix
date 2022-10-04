@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -11,6 +12,9 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -20,20 +24,24 @@ import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.compose.rememberNavController
 import com.example.jetflix.presentation.theme.JetflixTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent {
-            JetflixTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
-                ) {
-                    FilmItem()
-                }
+        renderUi()
+    }
+
+    private fun renderUi() = setContent {
+        val showSettingDialog = remember { mutableStateOf(false) }
+        val systemTheme = isSystemInDarkTheme()
+        val isDarkTheme = remember { mutableStateOf(systemTheme) }
+        val navController = rememberNavController()
+        JetflixTheme {
+            // A surface container using the 'background' color from the theme
+            CompositionLocalProvider(LocalNavController provides navController) {
+                MainContent(isDarkTheme, showSettingDialog)
             }
         }
     }
@@ -82,7 +90,7 @@ fun FilmItem(modifier: Modifier = Modifier) {
                         )
                         Row(
 
-                        ){
+                        ) {
 
                         }
                     }
