@@ -13,6 +13,7 @@ import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
+import com.example.jetflix.LocalNavController
 import com.example.jetflix.presentation.common.error.ErrorColumn
 import com.example.jetflix.presentation.common.error.ErrorRow
 import com.example.jetflix.presentation.common.loading.LoadingColumn
@@ -60,9 +61,9 @@ fun MoviesGrid(moviesViewModel: MoviesViewModel) {
 
 @Composable
 private fun LazyMoviesGrid(state: LazyGridState, moviePagingItems: LazyPagingItems<MovieModel>) {
-//    val navController = LocalNavController.current
-//    val onMovieClicked: (Int) -> Unit =
-//        { movieId -> navController.navigate(Screen.DETAIL.createPath(movieId)) }
+    val navController = LocalNavController.current
+    val onMovieClicked: (Int) -> Unit =
+        { movieId -> navController.navigate(Screen.DETAIL.createPath(movieId)) }
     LazyVerticalGrid(
         columns = GridCells.Fixed(COLUMN_COUNT),
         contentPadding = PaddingValues(
@@ -87,7 +88,7 @@ private fun LazyMoviesGrid(state: LazyGridState, moviePagingItems: LazyPagingIte
                     Modifier
                         .height(320.dp)
                         .padding(vertical = GRID_SPACING),
-//                    onMovieClicked
+                    onMovieClicked
 
                 )
             }

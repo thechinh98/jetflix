@@ -1,11 +1,11 @@
-package com.yasinkacmaz.jetflix.di
+package com.example.jetflix.di
 
 import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
-import com.yasinkacmaz.jetflix.ui.filter.FilterDataStore
-import com.yasinkacmaz.jetflix.ui.settings.LanguageDataStore
+import com.example.jetflix.data.source.local.FilterDataStore
+import com.example.jetflix.data.source.local.LanguageDataStore
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

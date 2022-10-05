@@ -3,25 +3,26 @@ package com.example.jetflix.presentation.screens.movies
 import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.paging.Pager
-import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.example.jetflix.data.model.MovieModel
 import com.example.jetflix.data.source.remote.MoviesPagingSource
 import com.example.jetflix.domain.entities.FilterState
 import com.example.jetflix.domain.usecase.filter.GetFilterStateUseCase
 import com.example.jetflix.domain.usecase.movie.MovieUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import javax.inject.Inject
 
+@HiltViewModel
 class MoviesViewModel @Inject constructor(
     getFilterStateUseCase: GetFilterStateUseCase,
     movieUseCase: MovieUseCase
 ) : ViewModel() {
-    val movies: Flow<PagingData<MovieModel>> = movieUseCase.getMovieFlowUseCase.invoke()
+    private var filterState: FilterState? = null
+    val movies: Flow<PagingData<MovieModel>> = movieUseCase.getMovieFlowUseCase.invoke(filterState)
 
     val filterStateChanges = MutableSharedFlow<FilterState>()
-    private var filterState: FilterState? = null
+
 
     private val searchQuery = MutableStateFlow("")
     private val _searchQueryChanges = MutableSharedFlow<Unit>()
@@ -52,6 +53,7 @@ class MoviesViewModel @Inject constructor(
 
         searchQuery.tryEmit(query)
     }
+
     companion object {
         private const val SEARCH_DEBOUNCE_MS = 300L
         private const val SEARCH_MINIMUM_LENGTH = 3

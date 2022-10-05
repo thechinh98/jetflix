@@ -2,14 +2,20 @@ package com.example.jetflix
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.compositionLocalOf
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.*
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.example.jetflix.presentation.screens.moviedetail.MovieDetailScreen
+import com.example.jetflix.presentation.screens.moviedetail.MovieDetailViewModel
 import com.example.jetflix.presentation.screens.movies.MoviesScreen
+import com.example.jetflix.presentation.screens.navigation.ARG_INITIAL_PAGE
 import com.example.jetflix.presentation.screens.navigation.ARG_MOVIE_ID
 import com.example.jetflix.presentation.screens.navigation.Screen
+import com.yasinkacmaz.jetflix.ui.moviedetail.image.ImagesScreen
+import com.yasinkacmaz.jetflix.ui.moviedetail.person.PeopleGridScreen
 
 val LocalNavController = compositionLocalOf<NavHostController> { error("No nav controller") }
 @Composable
@@ -28,30 +34,30 @@ fun MainContent(
                 return arguments?.getString(ARG_MOVIE_ID)!!.toInt()
             }
 
-//            val movieDetailViewModel: @Composable (movieId: Int) -> MovieDetailViewModel = { hiltViewModel() }
+            val movieDetailViewModel: @Composable (movieId: Int) -> MovieDetailViewModel = { hiltViewModel() }
 
-//            composable(route = Screen.DETAIL.route) {
-//                MovieDetailScreen(movieDetailViewModel(it.movieId()))
-//            }
-//
-//            composable(
-//                route = Screen.IMAGES.route,
-//                arguments = listOf(navArgument(ARG_INITIAL_PAGE) { defaultValue = "0" })
-//            ) {
-//                val initialPage = it.arguments?.getString(ARG_INITIAL_PAGE)!!.toInt()
-//                val images = movieDetailViewModel(it.movieId()).uiState.collectAsState().value.images
-//                ImagesScreen(images, initialPage)
-//            }
-//
-//            composable(route = Screen.CAST.route) {
-//                val cast = movieDetailViewModel(it.movieId()).uiState.collectAsState().value.credits.cast
-//                PeopleGridScreen(cast)
-//            }
-//
-//            composable(route = Screen.CREW.route) {
-//                val crew = movieDetailViewModel(it.movieId()).uiState.collectAsState().value.credits.crew
-//                PeopleGridScreen(crew)
-//            }
+            composable(route = Screen.DETAIL.route) {
+                MovieDetailScreen(movieDetailViewModel(it.movieId()))
+            }
+
+            composable(
+                route = Screen.IMAGES.route,
+                arguments = listOf(navArgument(ARG_INITIAL_PAGE) { defaultValue = "0" })
+            ) {
+                val initialPage = it.arguments?.getString(ARG_INITIAL_PAGE)!!.toInt()
+                val images = movieDetailViewModel(it.movieId()).uiState.collectAsState().value.images
+                ImagesScreen(images, initialPage)
+            }
+
+            composable(route = Screen.CAST.route) {
+                val cast = movieDetailViewModel(it.movieId()).uiState.collectAsState().value.credits.cast
+                PeopleGridScreen(cast)
+            }
+
+            composable(route = Screen.CREW.route) {
+                val crew = movieDetailViewModel(it.movieId()).uiState.collectAsState().value.credits.crew
+                PeopleGridScreen(crew)
+            }
         }
     }
 

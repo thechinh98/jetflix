@@ -5,9 +5,8 @@ import androidx.paging.PagingState
 import com.example.jetflix.data.mapper.MovieMapper
 import com.example.jetflix.data.model.MovieModel
 import com.example.jetflix.domain.entities.FilterState
-import javax.inject.Inject
 
-class MoviesPagingSource @Inject constructor(
+class MoviesPagingSource(
     private val movieMapper: MovieMapper,
     val filterState: FilterState? = null,
     val movieRemote: MovieRemote,

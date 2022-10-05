@@ -25,7 +25,8 @@ class FilterViewModel @Inject constructor(
 
     private fun listenFilterStateChanges() = viewModelScope.launch {
         val genres = try {
-            fetchGenreUseCase.invoke().genreEntities
+            val genre = fetchGenreUseCase.invoke()
+            genre.genreEntities
         } catch (exception: Exception) {
             emptyList()
         }

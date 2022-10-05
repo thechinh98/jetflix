@@ -23,7 +23,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.jetflix.R
 import com.example.jetflix.domain.entities.FilterState
-import com.example.jetflix.domain.entities.GenreUiModel
 import com.example.jetflix.presentation.screens.filter.FilterSectionDivider
 import com.example.jetflix.presentation.screens.filter.FilterSectionTitle
 import com.google.accompanist.flowlayout.FlowMainAxisAlignment
@@ -52,7 +51,7 @@ class GenresOption(override val defaultValue: GenresFilterOption) : FilterOption
             lastLineMainAxisAlignment = FlowMainAxisAlignment.Center
         ) {
             genreUiModels.forEach { genreUiModel ->
-                val genreId = genreUiModel.genre.id
+                val genreId = genreUiModel.id
                 GenreChip(uiModel = genreUiModel) { selected ->
                     selectedGenreIds.removeAll { it == genreId }
                     if (selected) {
@@ -73,8 +72,8 @@ class GenresOption(override val defaultValue: GenresFilterOption) : FilterOption
         // I've added only genreId and selectedGenreIds to remember because genres does not change.
         // I also am concerned(trying to reduce) about the slot table memory footprint.
         // IMHO this is the fine tuned option of remembering the genre chip selection state.
-        var selected by remember(uiModel.genre.id, selectedGenreIds) {
-            mutableStateOf(uiModel.genre.id in currentValue.second)
+        var selected by remember(uiModel.id, selectedGenreIds) {
+            mutableStateOf(uiModel.id in currentValue.second)
         }
         val animatedColors = List(colors.size) { i ->
             animateColorAsState(if (selected) colors[i] else colors[i].copy(alpha = 0f)).value
@@ -95,12 +94,14 @@ class GenresOption(override val defaultValue: GenresFilterOption) : FilterOption
             )
             .padding(horizontal = 10.dp, vertical = 3.dp)
 
-        Text(
-            text = uiModel.genre.name.orEmpty(),
-            maxLines = 1,
-            overflow = TextOverflow.Ellipsis,
-            style = MaterialTheme.typography.body2.copy(fontSize = 17.sp),
-            modifier = modifier
-        )
+        uiModel.name?.let {
+            Text(
+                text = it,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
+                style = MaterialTheme.typography.body2.copy(fontSize = 17.sp),
+                modifier = modifier
+            )
+        }
     }
 }

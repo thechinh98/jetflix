@@ -18,7 +18,7 @@ fun FilterState.toFilterOptions(): List<FilterOption<*>> = buildList {
     add(SortOrderOption(sortOrder))
     add(SortByOption(sortBy))
     if (genres.isNotEmpty()) {
-        add(GenresOption(GenresFilterOption(genres, selectedGenreIds.toMutableList())))
+        add(GenresOption(GenresFilterOption(genres.map{GenreUiModel(it)}, selectedGenreIds.toMutableList())))
     }
     add(IncludeAdultOption(includeAdult))
 }

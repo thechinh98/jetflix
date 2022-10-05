@@ -1,10 +1,6 @@
 package com.example.jetflix.data.api
 
-import com.example.jetflix.domain.entities.GenresResponse
-import com.example.jetflix.domain.entities.MoviesResponse
-import com.yasinkacmaz.jetflix.data.CreditsResponse
-import com.yasinkacmaz.jetflix.data.ImagesResponse
-import com.yasinkacmaz.jetflix.data.MovieDetailResponse
+import com.example.jetflix.domain.entities.*
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -28,11 +24,11 @@ interface MovieApi {
     suspend fun fetchGenres(): GenresResponse
 
     @GET("movie/{movie_id}")
-    suspend fun fetchMovieDetail(@Path("movie_id") movieId: Int): MovieDetailResponse
+    suspend fun fetchMovieDetail(@Path("movie_id") movieId: Int): MovieDetailEntity
 
     @GET("movie/{movie_id}/credits")
-    suspend fun fetchMovieCredits(@Path("movie_id") movieId: Int): CreditsResponse
+    suspend fun fetchMovieCredits(@Path("movie_id") movieId: Int): CreditsEntity
 
     @GET("movie/{movie_id}/images")
-    suspend fun fetchMovieImages(@Path("movie_id") movieId: Int): ImagesResponse
+    suspend fun fetchMovieImages(@Path("movie_id") movieId: Int): ImagesEntity
 }

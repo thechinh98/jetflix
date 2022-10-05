@@ -11,6 +11,7 @@ data class MoviesResponse(
     @SerialName("total_results") val totalResults: Int
 )
 
+@Serializable
 data class MovieEntity(
     @SerialName("id") val id: Int,
     @SerialName("release_date") val firstAirDate: String? = "",

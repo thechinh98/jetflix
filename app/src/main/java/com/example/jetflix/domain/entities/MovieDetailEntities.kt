@@ -1,11 +1,10 @@
-package com.example.jetflix.data.model
+package com.example.jetflix.domain.entities
 
-import com.example.jetflix.domain.entities.GenreEntity
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class MovieDetailResponse(
+data class MovieDetailEntity(
     @SerialName("adult") val adult: Boolean,
     @SerialName("backdrop_path") val backdropPath: String?,
     @SerialName("budget") val budget: Int,
@@ -17,11 +16,11 @@ data class MovieDetailResponse(
     @SerialName("overview") val overview: String,
     @SerialName("popularity") val popularity: Double,
     @SerialName("poster_path") val posterPath: String,
-    @SerialName("production_companies") val productionCompanies: List<ProductionCompanyResponse>,
+    @SerialName("production_companies") val productionCompanies: List<ProductionCompanyEntity>,
     @SerialName("release_date") val releaseDate: String? = "",
     @SerialName("revenue") val revenue: Double,
     @SerialName("runtime") val runtime: Int?,
-    @SerialName("spoken_languages") val spokenLanguages: List<SpokenLanguage>,
+    @SerialName("spoken_languages") val spokenLanguages: List<SpokenLanguageEntity>,
     @SerialName("status") val status: String,
     @SerialName("tagline") val tagline: String,
     @SerialName("title") val title: String,
@@ -30,7 +29,7 @@ data class MovieDetailResponse(
 )
 
 @Serializable
-data class ProductionCompanyResponse(
+data class ProductionCompanyEntity(
     @SerialName("id") val id: Int,
     @SerialName("logo_path") val logoPath: String?,
     @SerialName("name") val name: String,
@@ -38,7 +37,7 @@ data class ProductionCompanyResponse(
 )
 
 @Serializable
-data class SpokenLanguage(
+data class SpokenLanguageEntity(
     @SerialName("iso_639_1") val iso6391: String,
     @SerialName("name") val name: String
 )

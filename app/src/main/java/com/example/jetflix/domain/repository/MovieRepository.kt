@@ -10,5 +10,5 @@ import kotlinx.coroutines.flow.Flow
 interface MovieRepository {
     suspend fun fetchGenre(): GenresResponse
     suspend fun fetchMovies(pageNumber: Int,filterState: FilterState?): MoviesResponse
-    suspend fun getPagingSource() : Flow<PagingData<MovieModel>>
+    fun getPagingSource(filterState: FilterState?) : Flow<PagingData<MovieModel>>
 }
