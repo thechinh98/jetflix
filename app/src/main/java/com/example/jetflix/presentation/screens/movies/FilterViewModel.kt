@@ -2,9 +2,10 @@ package com.example.jetflix.presentation.screens.movies
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.jetflix.domain.entities.FilterState
-import com.example.jetflix.domain.usecase.genre.FetchGenreUseCase
+import com.example.jetflix.domain.entities.FilterStateEntity
+import com.example.jetflix.domain.entities.GenreEntity
 import com.example.jetflix.domain.usecase.filter.FilterUseCase
+import com.example.jetflix.domain.usecase.genre.FetchGenreUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -18,17 +19,16 @@ class FilterViewModel @Inject constructor(
     private val filterUseCase: FilterUseCase,
     private val fetchGenreUseCase: FetchGenreUseCase
 ) : ViewModel() {
-    private val _filterState: MutableStateFlow<FilterState?> = MutableStateFlow(null)
-    val filterState: StateFlow<FilterState?> = _filterState.also {
+    private val _filterState: MutableStateFlow<FilterStateEntity?> = MutableStateFlow(null)
+    val filterState: StateFlow<FilterStateEntity?> = _filterState.also {
         listenFilterStateChanges()
     }
 
     private fun listenFilterStateChanges() = viewModelScope.launch {
-        val genres = try {
-            val genre = fetchGenreUseCase.invoke()
-            genre.genreEntities
+        val genres : List<GenreEntity> = try {
+            fetchGenreUseCase.invoke()
         } catch (exception: Exception) {
-            emptyList()
+            emptyList<GenreEntity>()
         }
 
         filterUseCase.getFilterStateUseCase.invoke()
@@ -42,7 +42,7 @@ class FilterViewModel @Inject constructor(
         }
     }
 
-    fun onFilterStateChanged(filterState: FilterState) {
+    fun onFilterStateChanged(filterState: FilterStateEntity) {
         viewModelScope.launch(Dispatchers.IO) {
             filterUseCase.filterStateChangeUseCase.invoke(filterState)
         }

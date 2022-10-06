@@ -22,21 +22,22 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.jetflix.R
-import com.example.jetflix.domain.entities.FilterState
+import com.example.jetflix.domain.entities.FilterStateEntity
+import com.example.jetflix.domain.entities.GenreEntity
 import com.example.jetflix.presentation.screens.filter.FilterSectionDivider
 import com.example.jetflix.presentation.screens.filter.FilterSectionTitle
 import com.google.accompanist.flowlayout.FlowMainAxisAlignment
 import com.google.accompanist.flowlayout.FlowRow
 import com.google.accompanist.flowlayout.SizeMode
 
-typealias GenresFilterOption = Pair<List<GenreUiModel>, MutableList<Int>>
+typealias GenresFilterOption = Pair<List<GenreEntity>, MutableList<Int>>
 
 class GenresOption(override val defaultValue: GenresFilterOption) : FilterOption<GenresFilterOption> {
     override var currentValue: GenresFilterOption = defaultValue
 
     private val selectedGenreIds get() = currentValue.second
 
-    override fun modifyFilterState(filterState: FilterState) = filterState.copy(selectedGenreIds = currentValue.second)
+    override fun modifyFilterState(filterState: FilterStateEntity) = filterState.copy(selectedGenreIds = currentValue.second)
 
     @Composable
     override fun Render(onChanged: () -> Unit) {
@@ -66,7 +67,7 @@ class GenresOption(override val defaultValue: GenresFilterOption) : FilterOption
     }
 
     @Composable
-    private fun GenreChip(uiModel: GenreUiModel, onClicked: (Boolean) -> Unit) {
+    private fun GenreChip(uiModel: GenreEntity, onClicked: (Boolean) -> Unit) {
         val colors = listOf(uiModel.primaryColor, uiModel.secondaryColor)
         val shape = RoundedCornerShape(percent = 50)
         var selected by remember(uiModel.id, selectedGenreIds) {

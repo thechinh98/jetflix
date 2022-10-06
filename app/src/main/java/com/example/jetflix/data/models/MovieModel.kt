@@ -1,18 +1,18 @@
-package com.example.jetflix.domain.entities
+package com.example.jetflix.data.models
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class MoviesResponse(
+data class MoviesModel(
     @SerialName("page") val page: Int,
-    @SerialName("results") val movies: List<MovieEntity>,
+    @SerialName("results") val movies: List<MovieModel>,
     @SerialName("total_pages") val totalPages: Int,
     @SerialName("total_results") val totalResults: Int
 )
 
 @Serializable
-data class MovieEntity(
+data class MovieModel(
     @SerialName("id") val id: Int,
     @SerialName("release_date") val firstAirDate: String? = "",
     @SerialName("title") val name: String,

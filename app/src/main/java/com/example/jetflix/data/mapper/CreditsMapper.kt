@@ -1,15 +1,15 @@
-package com.example.jetflix.presentation.mapper
+package com.example.jetflix.data.mapper
 
-import com.example.jetflix.data.model.CreditsEntities
-import com.example.jetflix.data.model.GenderEntity
-import com.example.jetflix.data.model.PersonEntities
-import com.example.jetflix.domain.entities.CreditsEntity
+import com.example.jetflix.data.models.CreditsModel
 import com.example.jetflix.util.Mapper
+import com.example.jetflix.domain.entities.CreditsEntities
+import com.example.jetflix.domain.entities.GenderEntity
+import com.example.jetflix.domain.entities.PersonEntities
 import com.example.jetflix.util.toProfilePhotoUrl
 import javax.inject.Inject
 
-class CreditsMapper @Inject constructor() : Mapper<CreditsEntity, CreditsEntities> {
-    override fun map(input: CreditsEntity): CreditsEntities {
+class CreditsMapper @Inject constructor() : Mapper<CreditsModel, CreditsEntities> {
+    override fun map(input: CreditsModel): CreditsEntities {
         val cast = input.cast.map { cast ->
             PersonEntities(cast.name, cast.character, cast.profilePath?.toProfilePhotoUrl(), cast.gender.toGender())
         }

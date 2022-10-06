@@ -45,13 +45,13 @@ import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import com.example.jetflix.LocalNavController
 import com.example.jetflix.R
-import com.example.jetflix.data.model.Image
-import com.example.jetflix.data.model.MovieDetailEntities
-import com.example.jetflix.data.model.PersonEntities
-import com.example.jetflix.data.model.ProductionCompanyEntities
+import com.example.jetflix.domain.entities.ImageEntities
+import com.example.jetflix.domain.entities.MovieDetailEntities
+import com.example.jetflix.domain.entities.PersonEntities
+import com.example.jetflix.domain.entities.ProductionCompanyEntities
 import com.example.jetflix.presentation.common.error.ErrorColumn
 import com.example.jetflix.presentation.common.loading.LoadingColumn
-import com.example.jetflix.presentation.screens.filter.option.GenreUiModel
+import com.example.jetflix.domain.entities.GenreEntity
 import com.example.jetflix.presentation.screens.moviedetail.person.Person
 import com.example.jetflix.presentation.screens.navigation.Screen
 import com.example.jetflix.presentation.theme.imageTint
@@ -138,7 +138,7 @@ fun MovieDetail(
     movieDetail: MovieDetailEntities,
     cast: List<PersonEntities>,
     crew: List<PersonEntities>,
-    images: List<Image>
+    images: List<ImageEntities>
 ) {
     ConstraintLayout(
         Modifier
@@ -274,7 +274,7 @@ fun MovieDetail(
         val navController = LocalNavController.current
         MovieSection(
             items = cast,
-            headerResId = com.example.jetflix.R.string.cast,
+            headerResId = R.string.cast,
             onSeeAllClicked = { navController.navigate(Screen.CAST.createPath(movieDetail.id)) },
             itemContent = { item, _ -> Person(item, Modifier.width(140.dp)) },
             modifier = Modifier.constrainAs(castSection) {
@@ -377,13 +377,13 @@ private fun Poster(posterUrl: String, movieName: String, modifier: Modifier) {
 }
 
 @Composable
-private fun GenreChips(genres: List<GenreUiModel>, modifier: Modifier) {
+private fun GenreChips(genres: List<GenreEntity>, modifier: Modifier) {
     Row(
         modifier
             .horizontalScroll(rememberScrollState())
             .padding(horizontal = 16.dp)
     ) {
-        genres.map(GenreUiModel::name).forEachIndexed { index, name ->
+        genres.map(GenreEntity::name).forEachIndexed { index, name ->
             Text(
                 text = name.orEmpty(),
                 style = MaterialTheme.typography.subtitle1.copy(letterSpacing = 2.sp),
@@ -519,7 +519,7 @@ private fun SectionHeader(
 }
 
 @Composable
-private fun MovieImage(image: Image, index: Int) {
+private fun MovieImage(image: ImageEntities, index: Int) {
     val navController = LocalNavController.current
     val movieId = LocalMovieId.current
     Card(

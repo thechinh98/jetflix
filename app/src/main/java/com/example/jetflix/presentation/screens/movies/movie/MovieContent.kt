@@ -3,7 +3,6 @@ package com.example.jetflix.presentation.screens.movies.movie
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.layout.R
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -29,14 +28,14 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
 import coil.compose.AsyncImagePainter
 import coil.compose.rememberAsyncImagePainter
-import com.example.jetflix.data.model.MovieModel
+import com.example.jetflix.domain.entities.MovieEntities
 import com.example.jetflix.presentation.theme.imageTint
 import com.example.jetflix.util.rateColors
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun MovieContent(
-    movie: MovieModel,
+    movie: MovieEntities,
     modifier: Modifier = Modifier,
     onMovieClicked: (Int) -> Unit = {}
 ) {
@@ -110,7 +109,7 @@ private fun MovieRate(rate: Double, modifier: Modifier) {
         Text(
             text = rate.toString(),
             style = MaterialTheme.typography.body1.copy(color = Color.White),
-            modifier = androidx.compose.ui.Modifier
+            modifier = Modifier
                 .background(Brush.horizontalGradient(Color.rateColors(movieRate = rate)))
                 .padding(horizontal = 10.dp)
         )
@@ -118,7 +117,7 @@ private fun MovieRate(rate: Double, modifier: Modifier) {
 }
 
 @Composable
-private fun MovieInfo(movie: MovieModel, modifier: Modifier) {
+private fun MovieInfo(movie: MovieEntities, modifier: Modifier) {
     Column(
         verticalArrangement = Arrangement.spacedBy(4.dp),
         modifier = modifier.padding(horizontal = 6.dp, vertical = 4.dp)

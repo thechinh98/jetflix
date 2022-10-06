@@ -3,7 +3,7 @@ package com.example.jetflix.presentation.screens.setting
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.jetflix.domain.entities.Language
+import com.example.jetflix.domain.entities.LanguageEntity
 import com.example.jetflix.domain.usecase.language.ConfigurationUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -34,7 +34,7 @@ class SettingsViewModel @Inject constructor(
                 uiValue = try {
                     val languages =
                         configurationUseCase.fetchLanguageUseCase.invoke()
-                            .sortedBy(Language::englishName)
+                            .sortedBy(LanguageEntity::englishName)
                     uiValue.copy(showLoading = false, languages = languages)
                 } catch (exception: Exception) {
                     uiValue.copy(showLoading = false)
@@ -43,7 +43,7 @@ class SettingsViewModel @Inject constructor(
         }
     }
 
-    fun onLanguageSelected(language: Language) {
+    fun onLanguageSelected(language: LanguageEntity) {
         viewModelScope.launch(Dispatchers.IO) {
             configurationUseCase.changeLanguageUseCase.invoke(language)
         }
@@ -52,6 +52,6 @@ class SettingsViewModel @Inject constructor(
 
     data class UiState(
         val showLoading: Boolean = false,
-        val languages: List<Language> = emptyList()
+        val languages: List<LanguageEntity> = emptyList()
     )
 }

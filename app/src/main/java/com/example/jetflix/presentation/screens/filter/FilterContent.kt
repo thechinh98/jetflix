@@ -11,11 +11,14 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.jetflix.R
-import com.example.jetflix.domain.entities.FilterState
-import com.example.jetflix.presentation.screens.filter.option.toFilterOptions
+import com.example.jetflix.domain.entities.FilterStateEntity
+import com.example.jetflix.domain.entities.toFilterOptions
 
 @Composable
-fun FilterBottomSheetContent(filterState: FilterState, onFilterStateChanged: (FilterState) -> Unit) {
+fun FilterBottomSheetContent(
+    filterState: FilterStateEntity,
+    onFilterStateChanged: (FilterStateEntity) -> Unit
+) {
     Spacer(modifier = Modifier.padding(top = 4.dp))
     filterState.toFilterOptions().forEach { filterOption ->
         filterOption.Render {
@@ -24,6 +27,7 @@ fun FilterBottomSheetContent(filterState: FilterState, onFilterStateChanged: (Fi
         }
     }
 }
+
 @Composable
 fun FilterHeader(onHideClicked: () -> Unit, onResetClicked: (() -> Unit)? = null) {
     Surface(

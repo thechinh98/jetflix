@@ -36,7 +36,7 @@ import coil.compose.AsyncImagePainter
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import com.example.jetflix.R
-import com.example.jetflix.data.model.Image
+import com.example.jetflix.domain.entities.ImageEntities
 import com.example.jetflix.util.transformation.BlurTransformation
 import com.example.jetflix.util.transformation.SizeTransformation
 import com.google.accompanist.pager.ExperimentalPagerApi
@@ -45,7 +45,7 @@ import com.google.accompanist.pager.rememberPagerState
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-fun ImagesScreen(images: List<Image>, initialPage: Int) {
+fun ImagesScreen(images: List<ImageEntities>, initialPage: Int) {
     if (images.isEmpty() || initialPage !in images.indices) return
 
     val pagerState = rememberPagerState(initialPage = initialPage)
@@ -58,7 +58,7 @@ fun ImagesScreen(images: List<Image>, initialPage: Int) {
 }
 
 @Composable
-private fun Image(image: Image) {
+private fun Image(image: ImageEntities) {
     Box(contentAlignment = Alignment.Center, modifier = Modifier.fillMaxSize()) {
         BlurImage(image.url)
         Card(

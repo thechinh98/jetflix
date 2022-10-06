@@ -1,9 +1,9 @@
-package com.example.jetflix.data.model
+package com.example.jetflix.domain.entities
 
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class MovieModel(
+data class MovieEntities(
     val id: Int,
     val name: String,
     val releaseDate: String,

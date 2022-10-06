@@ -1,17 +1,17 @@
-package com.example.jetflix.domain.entities
+package com.example.jetflix.data.models
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class ImagesEntity(
-    @SerialName("backdrops") val backdrops: List<ImageEntity>,
+data class ImagesModel(
+    @SerialName("backdrops") val backdrops: List<ImageModel>,
     @SerialName("id") val id: Int,
-    @SerialName("posters") val posters: List<ImageEntity>
+    @SerialName("posters") val posters: List<ImageModel>
 )
 
 @Serializable
-data class ImageEntity(
+data class ImageModel(
     @SerialName("aspect_ratio") val aspectRatio: Double,
     @SerialName("file_path") val filePath: String,
     @SerialName("height") val height: Int,

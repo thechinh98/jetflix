@@ -1,6 +1,6 @@
 package com.example.jetflix.domain.usecase.movie
 
-import com.example.jetflix.domain.entities.FilterState
+import com.example.jetflix.data.models.FilterState
 import com.example.jetflix.domain.repository.MovieRepository
 import javax.inject.Inject
 

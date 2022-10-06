@@ -3,19 +3,19 @@ package com.example.jetflix.data.source.remote
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.jetflix.data.mapper.MovieMapper
-import com.example.jetflix.data.model.MovieModel
-import com.example.jetflix.domain.entities.FilterState
+import com.example.jetflix.domain.entities.MovieEntities
+import com.example.jetflix.data.models.FilterState
 
 class MoviesPagingSource(
     private val movieMapper: MovieMapper,
     val filterState: FilterState? = null,
     val movieRemote: MovieRemote,
-) : PagingSource<Int, MovieModel>() {
+) : PagingSource<Int, MovieEntities>() {
 
 
-    override fun getRefreshKey(state: PagingState<Int, MovieModel>): Int = 1
+    override fun getRefreshKey(state: PagingState<Int, MovieEntities>): Int = 1
 
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, MovieModel> {
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, MovieEntities> {
         return try {
             val page = params.key ?: 1
             val moviesResponse = movieRemote.fetchMovies(page, filterState)

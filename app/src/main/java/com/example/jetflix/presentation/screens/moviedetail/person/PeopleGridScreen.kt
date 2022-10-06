@@ -10,7 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
-import com.example.jetflix.data.model.PersonEntities
+import com.example.jetflix.domain.entities.PersonEntities
 import com.example.jetflix.presentation.screens.moviedetail.person.Person
 import com.example.jetflix.util.animation.ItemState
 import com.example.jetflix.util.toDp

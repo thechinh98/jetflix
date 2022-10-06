@@ -13,13 +13,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import com.example.jetflix.R
-import com.example.jetflix.domain.entities.FilterState
+import com.example.jetflix.domain.entities.FilterStateEntity
 import com.example.jetflix.presentation.screens.filter.FilterSectionTitle
 
 data class IncludeAdultOption(override val defaultValue: Boolean) : FilterOption<Boolean> {
     override var currentValue: Boolean = defaultValue
 
-    override fun modifyFilterState(filterState: FilterState) = filterState.copy(includeAdult = currentValue)
+    override fun modifyFilterState(filterState: FilterStateEntity) = filterState.copy(includeAdult = currentValue)
 
     @Composable
     override fun Render(onChanged: () -> Unit) {

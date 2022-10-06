@@ -18,11 +18,10 @@ import com.example.jetflix.presentation.common.error.ErrorColumn
 import com.example.jetflix.presentation.common.error.ErrorRow
 import com.example.jetflix.presentation.common.loading.LoadingColumn
 import com.example.jetflix.presentation.screens.movies.movie.MovieContent
-import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import com.example.jetflix.R
-import com.example.jetflix.data.model.MovieModel
+import com.example.jetflix.domain.entities.MovieEntities
 import com.example.jetflix.presentation.common.loading.LoadingRow
 import com.example.jetflix.presentation.screens.navigation.Screen
 import com.example.jetflix.util.toDp
@@ -59,7 +58,7 @@ fun MoviesGrid(moviesViewModel: MoviesViewModel) {
 }
 
 @Composable
-private fun LazyMoviesGrid(state: LazyGridState, moviePagingItems: LazyPagingItems<MovieModel>) {
+private fun LazyMoviesGrid(state: LazyGridState, moviePagingItems: LazyPagingItems<MovieEntities>) {
     val navController = LocalNavController.current
     val onMovieClicked: (Int) -> Unit =
         { movieId -> navController.navigate(Screen.DETAIL.createPath(movieId)) }

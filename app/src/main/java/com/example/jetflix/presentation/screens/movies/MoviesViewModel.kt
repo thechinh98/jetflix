@@ -3,8 +3,8 @@ package com.example.jetflix.presentation.screens.movies
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
-import com.example.jetflix.data.model.MovieModel
-import com.example.jetflix.domain.entities.FilterState
+import com.example.jetflix.domain.entities.FilterStateEntity
+import com.example.jetflix.domain.entities.MovieEntities
 import com.example.jetflix.domain.usecase.filter.GetFilterStateUseCase
 import com.example.jetflix.domain.usecase.movie.MovieUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -19,10 +19,10 @@ class MoviesViewModel @Inject constructor(
     getFilterStateUseCase: GetFilterStateUseCase,
     movieUseCase: MovieUseCase
 ) : ViewModel() {
-    private var filterState: FilterState? = null
-    val movies: Flow<PagingData<MovieModel>> = movieUseCase.getMovieFlowUseCase.flow
+    private var filterState: FilterStateEntity? = null
+    val movies: Flow<PagingData<MovieEntities>> = movieUseCase.getMovieFlowUseCase.flow
 
-    val filterStateChanges = MutableSharedFlow<FilterState>()
+    val filterStateChanges = MutableSharedFlow<FilterStateEntity>()
 
     init {
         getFilterStateUseCase.invoke()

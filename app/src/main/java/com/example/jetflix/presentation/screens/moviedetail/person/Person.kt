@@ -25,8 +25,8 @@ import coil.compose.AsyncImagePainter.State.Loading
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import com.example.jetflix.R
-import com.example.jetflix.data.model.PersonEntities
-import com.example.jetflix.data.model.placeholderIcon
+import com.example.jetflix.domain.entities.PersonEntities
+import com.example.jetflix.domain.entities.placeholderIcon
 import com.example.jetflix.presentation.theme.imageTint
 import com.example.jetflix.util.transformation.CircleTopCropTransformation
 

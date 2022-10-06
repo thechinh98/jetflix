@@ -43,7 +43,7 @@ import androidx.compose.ui.window.Dialog
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import com.example.jetflix.R
-import com.example.jetflix.domain.entities.Language
+import com.example.jetflix.domain.entities.LanguageEntity
 import com.example.jetflix.domain.entities.flagUrl
 import com.example.jetflix.presentation.common.loading.LoadingRow
 
@@ -63,7 +63,7 @@ fun SettingsContent(onDialogDismiss: () -> Unit) {
     val settingsViewModel = hiltViewModel<SettingsViewModel>()
     settingsViewModel.fetchLanguages()
     val uiState = settingsViewModel.uiState.collectAsState().value
-    val selectedLanguage = settingsViewModel.selectedLanguage.collectAsState(initial = Language.default)
+    val selectedLanguage = settingsViewModel.selectedLanguage.collectAsState(initial = LanguageEntity.default)
     SettingsDialog(
         uiState,
         selectedLanguage,
@@ -75,8 +75,8 @@ fun SettingsContent(onDialogDismiss: () -> Unit) {
 @Composable
 fun SettingsDialog(
     uiState: SettingsViewModel.UiState,
-    selectedLanguage: State<Language>,
-    onLanguageSelected: (Language) -> Unit,
+    selectedLanguage: State<LanguageEntity>,
+    onLanguageSelected: (LanguageEntity) -> Unit,
     onDialogDismiss: () -> Unit
 ) {
     Dialog(onDismissRequest = onDialogDismiss) {
@@ -106,9 +106,9 @@ fun SettingsDialog(
 
 @Composable
 private fun LanguageRow(
-    languages: List<Language>,
-    selectedLanguage: Language,
-    onLanguageSelected: (Language) -> Unit
+    languages: List<LanguageEntity>,
+    selectedLanguage: LanguageEntity,
+    onLanguageSelected: (LanguageEntity) -> Unit
 ) {
     Row(
         Modifier.fillMaxWidth(),

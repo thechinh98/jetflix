@@ -1,6 +1,6 @@
 package com.example.jetflix.data.mapper
 
-import com.example.jetflix.domain.entities.FilterState
+import com.example.jetflix.data.models.FilterState
 import com.example.jetflix.util.Mapper
 import javax.inject.Inject
 

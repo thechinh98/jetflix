@@ -1,10 +1,20 @@
 package com.example.jetflix.domain.entities
 
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
+import androidx.compose.ui.graphics.Color
+import com.example.jetflix.data.models.GenreModel
+import com.example.jetflix.util.randomColor
+import kotlinx.serialization.Transient
 
-@Serializable
-data class GenresResponse(@SerialName("genres") val genreEntities: List<GenreEntity>)
+data class GenreEntity (
+    var id: Int,
+    var name: String?
+) {
+    constructor(genreEntity: GenreModel) : this(genreEntity.id, genreEntity.name){
 
-@Serializable
-data class GenreEntity(@SerialName("id") val id: Int, @SerialName("name") val name: String?)
+    }
+    @Transient
+    val primaryColor: Color = Color.randomColor()
+
+    @Transient
+    val secondaryColor: Color = Color.randomColor()
+}

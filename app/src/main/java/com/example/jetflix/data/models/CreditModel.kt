@@ -1,17 +1,17 @@
-package com.example.jetflix.domain.entities
+package com.example.jetflix.data.models
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class CreditsEntity(
+data class CreditsModel(
     @SerialName("id") val id: Int,
-    @SerialName("cast") val cast: List<CastEntity>,
-    @SerialName("crew") val crew: List<CrewEntity>
+    @SerialName("cast") val cast: List<CastModel>,
+    @SerialName("crew") val crew: List<CrewModel>
 )
 
 @Serializable
-data class CastEntity(
+data class CastModel(
     @SerialName("cast_id") val castId: Int,
     @SerialName("character") val character: String,
     @SerialName("credit_id") val creditId: String,
@@ -23,7 +23,7 @@ data class CastEntity(
 )
 
 @Serializable
-data class CrewEntity(
+data class CrewModel(
     @SerialName("credit_id") val creditId: String,
     @SerialName("department") val department: String,
     @SerialName("gender") val gender: Int,

@@ -1,4 +1,4 @@
-package com.example.jetflix.data.model
+package com.example.jetflix.domain.entities
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Man
