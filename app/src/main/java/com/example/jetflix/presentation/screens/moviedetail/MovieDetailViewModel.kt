@@ -3,9 +3,9 @@ package com.example.jetflix.presentation.screens.moviedetail
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.jetflix.data.model.Credits
+import com.example.jetflix.data.model.CreditsEntities
 import com.example.jetflix.data.model.Image
-import com.example.jetflix.data.model.MovieDetail
+import com.example.jetflix.data.model.MovieDetailEntities
 import com.example.jetflix.domain.usecase.moviedetail.MovieDetailUseCase
 import com.example.jetflix.presentation.mapper.CreditsMapper
 import com.example.jetflix.presentation.mapper.ImageMapper
@@ -57,8 +57,8 @@ class MovieDetailViewModel @Inject constructor(
     }
 
     data class MovieDetailUiState(
-        val movieDetail: MovieDetail? = null,
-        val credits: Credits = Credits(listOf(), listOf()),
+        val movieDetail: MovieDetailEntities? = null,
+        val credits: CreditsEntities = CreditsEntities(listOf(), listOf()),
         val images: List<Image> = listOf(),
         val loading: Boolean = false,
         val error: Throwable? = null

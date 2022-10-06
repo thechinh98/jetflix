@@ -1,4 +1,4 @@
-package com.yasinkacmaz.jetflix.di
+package com.example.jetflix.di
 
 import dagger.Module
 import dagger.Provides

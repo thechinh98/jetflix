@@ -46,9 +46,9 @@ import coil.request.ImageRequest
 import com.example.jetflix.LocalNavController
 import com.example.jetflix.R
 import com.example.jetflix.data.model.Image
-import com.example.jetflix.data.model.MovieDetail
-import com.example.jetflix.data.model.PersonUiModel
-import com.example.jetflix.data.model.ProductionCompany
+import com.example.jetflix.data.model.MovieDetailEntities
+import com.example.jetflix.data.model.PersonEntities
+import com.example.jetflix.data.model.ProductionCompanyEntities
 import com.example.jetflix.presentation.common.error.ErrorColumn
 import com.example.jetflix.presentation.common.loading.LoadingColumn
 import com.example.jetflix.presentation.screens.filter.option.GenreUiModel
@@ -135,9 +135,9 @@ private fun openHomepage(context: Context, homepage: String, vibrantColor: Color
 
 @Composable
 fun MovieDetail(
-    movieDetail: MovieDetail,
-    cast: List<PersonUiModel>,
-    crew: List<PersonUiModel>,
+    movieDetail: MovieDetailEntities,
+    cast: List<PersonEntities>,
+    crew: List<PersonEntities>,
     images: List<Image>
 ) {
     ConstraintLayout(
@@ -356,7 +356,7 @@ private fun Poster(posterUrl: String, movieName: String, modifier: Modifier) {
     val scale =
         animateFloatAsState(
             targetValue = if (isScaled.value) 2.2f else 1f,
-            animationSpec = springAnimation
+            animationSpec =  springAnimation
         ).value
 
     Card(
@@ -422,7 +422,7 @@ private fun RateStars(voteAverage: Double, modifier: Modifier) {
 }
 
 @Composable
-private fun MovieFields(movieDetail: MovieDetail, modifier: Modifier) {
+private fun MovieFields(movieDetail: MovieDetailEntities, modifier: Modifier) {
     Row(horizontalArrangement = Arrangement.spacedBy(20.dp), modifier = modifier) {
         val context = LocalContext.current
         MovieField(context.getString(R.string.release_date), movieDetail.releaseDate)
@@ -555,7 +555,7 @@ private fun MovieImage(image: Image, index: Int) {
 }
 
 @Composable
-private fun ProductionCompany(company: ProductionCompany) {
+private fun ProductionCompany(company: ProductionCompanyEntities) {
     Card(
         Modifier
             .width(160.dp)

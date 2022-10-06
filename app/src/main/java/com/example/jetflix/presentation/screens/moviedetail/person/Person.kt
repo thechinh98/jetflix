@@ -25,13 +25,13 @@ import coil.compose.AsyncImagePainter.State.Loading
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import com.example.jetflix.R
-import com.example.jetflix.data.model.PersonUiModel
+import com.example.jetflix.data.model.PersonEntities
 import com.example.jetflix.data.model.placeholderIcon
 import com.example.jetflix.presentation.theme.imageTint
 import com.example.jetflix.util.transformation.CircleTopCropTransformation
 
 @Composable
-fun Person(person: PersonUiModel, modifier: Modifier = Modifier) {
+fun Person(person: PersonEntities, modifier: Modifier = Modifier) {
     Column(modifier.padding(4.dp), horizontalAlignment = Alignment.CenterHorizontally) {
         Card(shape = CircleShape, elevation = 8.dp, modifier = Modifier.size(120.dp)) {
             val request = ImageRequest.Builder(LocalContext.current)

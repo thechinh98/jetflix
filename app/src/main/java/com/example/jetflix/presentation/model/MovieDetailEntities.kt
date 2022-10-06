@@ -3,7 +3,7 @@ package com.example.jetflix.data.model
 import com.example.jetflix.presentation.screens.filter.option.GenreUiModel
 
 
-data class MovieDetail(
+data class MovieDetailEntities(
     val id: Int,
     val title: String = "",
     val originalTitle: String = "",
@@ -16,8 +16,8 @@ data class MovieDetail(
     val voteAverage: Double = 0.0,
     val voteCount: Int = 0,
     val duration: Int = 0,
-    val productionCompanies: List<ProductionCompany> = emptyList(),
+    val productionCompanies: List<ProductionCompanyEntities> = emptyList(),
     val homepage: String? = null
 )
 
-data class ProductionCompany(val name: String, val logoUrl: String)
+data class ProductionCompanyEntities(val name: String, val logoUrl: String)

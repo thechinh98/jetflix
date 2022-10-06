@@ -26,13 +26,15 @@ class MovieRepositoryImpl @Inject constructor(
 
     override fun getPagingSource(filterState: FilterState?): Flow<PagingData<MovieModel>> {
         val pager: Pager<Int, MovieModel> =
-            Pager(config = PagingConfig(pageSize = 20), pagingSourceFactory = {
+            Pager(
+                config = PagingConfig(pageSize = 20)
+            ) {
                 MoviesPagingSource(
                     movieMapper = movieMapper,
                     filterState = filterState,
                     movieRemote = movieRemote,
                 )
-            })
+            }
 
         return pager.flow
     }

@@ -69,9 +69,6 @@ class GenresOption(override val defaultValue: GenresFilterOption) : FilterOption
     private fun GenreChip(uiModel: GenreUiModel, onClicked: (Boolean) -> Unit) {
         val colors = listOf(uiModel.primaryColor, uiModel.secondaryColor)
         val shape = RoundedCornerShape(percent = 50)
-        // I've added only genreId and selectedGenreIds to remember because genres does not change.
-        // I also am concerned(trying to reduce) about the slot table memory footprint.
-        // IMHO this is the fine tuned option of remembering the genre chip selection state.
         var selected by remember(uiModel.id, selectedGenreIds) {
             mutableStateOf(uiModel.id in currentValue.second)
         }
