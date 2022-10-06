@@ -31,4 +31,7 @@ interface MovieApi {
 
     @GET("movie/{movie_id}/images")
     suspend fun fetchMovieImages(@Path("movie_id") movieId: Int): ImagesEntity
+
+    @GET("configuration/languages")
+    suspend fun fetchLanguages(): List<Language>
 }

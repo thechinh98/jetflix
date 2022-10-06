@@ -14,6 +14,7 @@ import com.example.jetflix.presentation.screens.movies.MoviesScreen
 import com.example.jetflix.presentation.screens.navigation.ARG_INITIAL_PAGE
 import com.example.jetflix.presentation.screens.navigation.ARG_MOVIE_ID
 import com.example.jetflix.presentation.screens.navigation.Screen
+import com.example.jetflix.presentation.screens.setting.SettingsContent
 import com.yasinkacmaz.jetflix.ui.moviedetail.image.ImagesScreen
 import com.yasinkacmaz.jetflix.ui.moviedetail.person.PeopleGridScreen
 
@@ -61,9 +62,9 @@ fun MainContent(
         }
     }
 
-//    if (showSettingsDialog.value) {
-//        SettingsContent {
-//            showSettingsDialog.value = false
-//        }
-//    }
+    if (showSettingsDialog.value) {
+        SettingsContent {
+            showSettingsDialog.value = false
+        }
+    }
 }

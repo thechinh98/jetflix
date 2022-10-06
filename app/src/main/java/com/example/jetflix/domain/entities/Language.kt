@@ -1,4 +1,4 @@
-package com.example.jetflix.data.source.local
+package com.example.jetflix.domain.entities
 
 import android.annotation.SuppressLint
 import kotlinx.serialization.SerialName

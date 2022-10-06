@@ -3,6 +3,7 @@ package com.example.jetflix
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
@@ -24,14 +25,17 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.compose.rememberNavController
+import com.example.jetflix.presentation.screens.setting.SettingsViewModel
 import com.example.jetflix.presentation.theme.JetflixTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+    private val settingsViewModel: SettingsViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         renderUi()
+        settingsViewModel.onSettingsChanged.observe(this) { restart() }
     }
 
     private fun renderUi() = setContent {
@@ -39,12 +43,17 @@ class MainActivity : ComponentActivity() {
         val systemTheme = isSystemInDarkTheme()
         val isDarkTheme = remember { mutableStateOf(systemTheme) }
         val navController = rememberNavController()
-        JetflixTheme {
+        JetflixTheme(isDarkTheme = isDarkTheme.value) {
             // A surface container using the 'background' color from the theme
             CompositionLocalProvider(LocalNavController provides navController) {
                 MainContent(isDarkTheme, showSettingDialog)
             }
         }
+    }
+
+    private fun restart() {
+        finish()
+        startActivity(intent)
     }
 }
 

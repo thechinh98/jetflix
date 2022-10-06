@@ -37,11 +37,10 @@ fun MoviesGrid(moviesViewModel: MoviesViewModel) {
     val movies = moviesViewModel.movies.collectAsLazyPagingItems()
     val state = rememberLazyGridState()
     LaunchedEffect(Unit) {
-        combine(moviesViewModel.filterStateChanges, moviesViewModel.searchQueryChanges) { _, _ -> }
-            .onEach {
-                state.scrollToItem(0)
-                movies.refresh()
-            }
+        moviesViewModel.filterStateChanges.onEach {
+            state.scrollToItem(0)
+            movies.refresh()
+        }
             .launchIn(this)
     }
 
